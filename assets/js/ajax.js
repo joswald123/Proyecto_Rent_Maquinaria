@@ -10,6 +10,8 @@ var createRow = function(items) {
         var brandTd = $("<td>").text(items[i].brand);
         var modelTd = $("<td>").text(items[i].model);
         var categoryIdTd = $("<td>").text(items[i].category_id);
+        var button = "<button onclick='borrar("+items[i].id+")'>Borrar</button>";
+        
         
 
         tRow.append(idTd);
@@ -17,6 +19,7 @@ var createRow = function(items) {
         tRow.append(brandTd);
         tRow.append(modelTd);
         tRow.append(categoryIdTd);
+        tRow.append(button);
         
         $("tbody").append(tRow)
 
@@ -28,12 +31,83 @@ var machineTable = function(){
     var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/machine/machine";
     $.ajax({
         url: queryURL,
-        method: "GET"
-    }).then(function(response){
-        createRow(response.items);
-        console.log(response.items);
+        method: "GET",
+        datatype:"JSON",
+        success:function(response){
+            createRow(response.items);
+            console.log(response.items);
+            
+        }
     });
 };
 
 machineTable()
+
+
+// Funcion para guardar informacion
+
+$('#submitButton').on('click', function(){
+
+    var machineToAdd = {
+
+        id:$("#id").val(),
+        brand: $("#brand").val(),
+        model: $("#model").val(),
+        category_id: $("#category_id").val(),
+        name: $("#name").val(),
+
+    };
+
+    let dataToSend =JSON.stringify(machineToAdd);
+    
+    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/machine/machine";
+    $.ajax({
+        url: queryURL,
+        type: "POST",
+        data: dataToSend,
+        contentType: 'application/json',
+
+        success: function(response){
+            $("#resultado").empty();
+            console.log(response)
+            machineTable();
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+
+        }
+    });
+
+
+});
+
+
+function borrar(idMachine){
+    
+    let myData={
+        id:idMachine
+    };
+
+    let dataToSend=JSON.stringify(myData);
+    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/machine/machine";
+    $.ajax({
+        url: queryURL,
+        type:"DELETE",
+		data:dataToSend,
+		contentType:"application/JSON",
+		datatype:"JSON",
+        success: function(response){
+            $("#resultado").empty();
+            console.log(response)
+            machineTable();
+            alert("Se Ha Eliminado");
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+
+        }
+    });
+
+}
+
+
+
 
