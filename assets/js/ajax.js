@@ -10,7 +10,7 @@ var createRow = function(items) {
         var brandTd = $("<td>").text(items[i].brand);
         var modelTd = $("<td>").text(items[i].model);
         var categoryIdTd = $("<td>").text(items[i].category_id);
-        var button = "<button onclick='borrar("+items[i].id+")'>Borrar</button>";
+        var button = "<button onclick='deleteMachine("+items[i].id+")'>Borrar</button>";
         
         
 
@@ -80,8 +80,8 @@ $('#submitButton').on('click', function(){
 
 });
 
-
-function borrar(idMachine){
+// funcion 
+function deleteMachine(idMachine){
     
     let myData={
         id:idMachine
