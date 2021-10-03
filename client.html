@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Maquinas</title>
+	<title>Client</title>
     <link href="https://fonts.googleapis.com/css?family=Helvetica Neue:300,400,700,900" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" 
@@ -46,9 +46,8 @@
             <!-- The scope attribute specifies that this is a header for a column -->
                 <th scope="col">ID</th>
                 <th scope="col">NAME</th>
-                <th scope="col">BRAND</th>
-                <th scope="col">MODEL</th>
-                <th scope="col">CATEGORY_ID</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">AGE</th>
             </tr>
         </thead>
         <tbody id="resultado">
@@ -64,23 +63,19 @@
     <form class="container formulario">
         <div class="form-group">
             <label for="idMaquina">ID</label>
-            <input type="number" class="form-control" id="id" placeholder="Id Maquina">
+            <input type="number" class="form-control" id="id" placeholder="Id Client">
         </div>
         <div class="form-group">
             <label for="nameMaquina">NAME</label>
-            <input type="text" class="form-control" id="name" placeholder="Name">
+            <input type="text" class="form-control" id="name" placeholder="Client Name">
         </div>
         <div class="form-group">
-            <label for="brandMaquina">BRAND</label>
-            <input type="text" class="form-control" id="brand" placeholder="Brand">
+            <label for="brandMaquina">EMAIL</label>
+            <input type="text" class="form-control" id="email" placeholder="Email">
         </div>
         <div class="form-group">
-            <label for="idMaquina">MODEL</label>
-            <input type="number" class="form-control" id="model" placeholder="Model">
-        </div>
-        <div class="form-group">
-            <label for="idMaquina">CATEGORY_ID</label>
-            <input type="number" class="form-control" id="category_id" placeholder="Category_id">
+            <label for="idMaquina">AGE</label>
+            <input type="number" class="form-control" id="age" placeholder="Client Age">
         </div>
 
         <button type="button" class="btn btn-primary offset-md-5" data-toggle="button" aria-pressed="false"
@@ -94,7 +89,7 @@
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/machine.js"></script>
+<script type="text/javascript" src="assets/js/client.js"></script>
     
     
 </html>
