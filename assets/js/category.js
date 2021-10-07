@@ -1,4 +1,4 @@
-// Funcion para crear las filas de la tabla alimentada por la funcion machineTable 
+// Funcion para crear las filas de la tabla alimentada por la funcion CategoryTable 
 var createRow = function(items) {
     // creamos unanueva fila en la tabla
     for(i=0;i<items.length;i++){
@@ -6,14 +6,14 @@ var createRow = function(items) {
         var tRow = $("<tr>");
 
         var idTd = $("<td>").text(items[i].id);
-        var messageTd = $("<td>").text(items[i].messagetext);
-        var buttonDelete = "<button onclick='deleteMessage("+items[i].id+")'>Borrar</button>";
+        var nameTd = $("<td>").text(items[i].name);
+        var buttonDelete = "<button onclick='deleteCategory("+items[i].id+")'>Borrar</button>";
         
         
         
 
         tRow.append(idTd);
-        tRow.append(messageTd);
+        tRow.append(nameTd);
         tRow.append(buttonDelete);
         
         $("tbody").append(tRow)
@@ -23,8 +23,8 @@ var createRow = function(items) {
     
 }
 // Funcion que consulta toda la info de la tabla machine SQL Cloud
-var messageTable = function(){
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/message/message";
+var categoryTable = function(){
+    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/category/category";
     $.ajax({
         url: queryURL,
         method: "GET",
@@ -37,23 +37,23 @@ var messageTable = function(){
     });
 };
 
-messageTable()
+categoryTable()
 
 
 // Funcion para guardar informacion
 
 $('#submitButton').on('click', function(){
 
-    var messageToAdd = {
+    var categoryToAdd = {
 
-        id:$("#id").val(),
-        messagetext: $("#messagetext").val(),
+        id:$("#id_category").val(),
+        name: $("#name_category").val(),
 
     };
 
-    let dataToSend =JSON.stringify(messageToAdd);
+    let dataToSend =JSON.stringify(categoryToAdd);
     
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/message/message";
+    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/category/category";
     $.ajax({
         url: queryURL,
         type: "POST",
@@ -63,7 +63,7 @@ $('#submitButton').on('click', function(){
         success: function(response){
             $("#resultado").empty();
             console.log(response)
-            messageTable();
+            categoryTable();
         },
         error: function(jqXHR, textStatus, errorThrown){
 
@@ -77,16 +77,16 @@ $('#submitButton').on('click', function(){
 
 $('#updateButton').on('click', function(){
 
-    var messageToAdd = {
+    var categoryToAdd = {
 
-        id:$("#id").val(),
-        messagetext: $("#messagetext").val(),
+        id:$("#id_category").val(),
+        name: $("#name_category").val(),
 
     };
 
-    let dataToSend =JSON.stringify(messageToAdd);
+    let dataToSend =JSON.stringify(categoryToAdd);
     
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/message/message";
+    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/category/category";
     $.ajax({
         url: queryURL,
         type: "PUT",
@@ -95,9 +95,9 @@ $('#updateButton').on('click', function(){
 
         success: function(response){
             $("#resultado").empty();
-            $("#id").val(),
-            $("#messagetext").val(),
-            messageTable();
+            $("#id_category").val(),
+            $("#name_category").val(),
+            categoryTable();
             alert("Se ha actualizado");
         },
         error: function(jqXHR, textStatus, errorThrown){
@@ -109,14 +109,14 @@ $('#updateButton').on('click', function(){
 
 
 // funcion para eliminar info
-function deleteMessage(idMessage){
+function deleteCategory(idCategory){
     
     let myData={
-        id:idMessage
+        id:idCategory
     };
 
     let dataToSend=JSON.stringify(myData);
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/message/message";
+    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/category/category";
     $.ajax({
         url: queryURL,
         type:"DELETE",
@@ -126,7 +126,7 @@ function deleteMessage(idMessage){
         success: function(response){
             $("#resultado").empty();
             console.log(response)
-            messageTable();
+            categoryTable();
             alert("Se Ha Eliminado");
             
         },
@@ -136,5 +136,3 @@ function deleteMessage(idMessage){
     });
 
 }
-
-

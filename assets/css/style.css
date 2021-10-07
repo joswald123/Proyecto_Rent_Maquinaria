@@ -7,8 +7,13 @@ body {
     color: #212529;
     text-align: left;
     background-color:#f5f5f5;
-    padding: 50px 0px;
+    padding: 0, 0, 0, 0;
+    /* justify-content: center;
+    align-items: center; */
 }
+/* .hidden{
+    display: none;
+} */
 
 .form-signin{
     width: 100%;
@@ -39,10 +44,69 @@ body {
     overflow: visible;
 } */
 
-.formulario {
+.container-formulario {
+    width: calc(60% - 50px);
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    margin-left:200px;
+    margin-top: 10px;
 
-    margin-top: 100px;
-    margin-bottom: 100px;
-    margin-right: 150px;
-    margin-left: 80px;
+    
 }
+
+.container title {
+    font-size: 25PX;
+    font-weight: 500;
+    position: relative;
+}
+
+.container .title::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: #FFD700;
+
+
+}
+.content-table {
+    border-collapse: collapse;
+    margin: 25px, 0;
+    font-size: 1.0em;
+    width: calc(100% - 100px);
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgb(0, 0, 0, 0.15);
+}
+
+.content-table thead tr{
+    background-color:#FFD700;
+    color: #ffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.content-table th 
+.content-table td{
+    padding: 12px 15px;
+
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.content-table tbody tr:nth-of-type(even){
+    background-color: white;
+}
+
+.content-table tbody tr:last-of-type{
+    border-bottom: 2px solid #FFD700;
+}
+
+.btn {background-color: #FFD700;}
