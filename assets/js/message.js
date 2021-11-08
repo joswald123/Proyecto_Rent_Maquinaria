@@ -1,4 +1,13 @@
+// URL variable constante
+const queryURL = 'http://129.151.115.16:8080/api/Message';
+
+$(document).ready(function () {
+    messageTable();
+    loadMachine();
+});
+
 // Funcion para crear las filas de la tabla alimentada por la funcion machineTable 
+
 var createRow = function(items) {
     // creamos unanueva fila en la tabla
     for(i=0;i<items.length;i++){
@@ -7,13 +16,15 @@ var createRow = function(items) {
 
         var idTd = $("<td>").text(items[i].id);
         var messageTd = $("<td>").text(items[i].messagetext);
+        var clientNameTd = $("<td>").text(items[i].client["name"]);
+        var machineNameTd = $("<td>").text(items[i].machine["name"]);
         var buttonDelete = "<button onclick='deleteMessage("+items[i].id+")'>Borrar</button>";
-        
-        
         
 
         tRow.append(idTd);
         tRow.append(messageTd);
+        tRow.append(clientNameTd);
+        tRow.append(machineNameTd);
         tRow.append(buttonDelete);
         
         $("tbody").append(tRow)
@@ -22,22 +33,42 @@ var createRow = function(items) {
 
     
 }
+
+// Funcion para cargar informacion de la tabla Maquina
+function loadMachine() {
+    $.ajax({
+        url: 'http://129.151.115.16:8080/api/Machine/all',
+        type: 'GET',
+        datatype: 'JSON',
+        success: function (response) {
+            var myItems = response;
+            console.log(myItems)
+            var valor = '<option selected>Select one</option>';
+            for (i = 0; i < myItems.length; i++) {
+                valor += '<option value="' + myItems[i].id + '">' + myItems[i].name + '</option></td>';
+            }
+            $('#machine_id').html(valor);
+        }
+    });
+}
+
 // Funcion que consulta toda la info de la tabla machine SQL Cloud
 var messageTable = function(){
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/message/message";
+
     $.ajax({
-        url: queryURL,
+        url: queryURL + '/all',
         method: "GET",
         datatype:"JSON",
         success:function(response){
-            createRow(response.items);
-            console.log(response.items);
+            var items = response;
+            createRow(items);
+            console.log(items);
             
         }
     });
 };
 
-messageTable()
+
 
 
 // Funcion para guardar informacion
@@ -48,14 +79,15 @@ $('#submitButton').on('click', function(){
 
         id:$("#id").val(),
         messagetext: $("#messagetext").val(),
+        client: {idClient: $('#client_id').val()},  
+        machine: {id: $('select[id=machine_id]').val()}    
 
     };
 
     let dataToSend =JSON.stringify(messageToAdd);
     
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/message/message";
     $.ajax({
-        url: queryURL,
+        url: queryURL + '/save',
         type: "POST",
         data: dataToSend,
         contentType: 'application/json',
@@ -86,9 +118,8 @@ $('#updateButton').on('click', function(){
 
     let dataToSend =JSON.stringify(messageToAdd);
     
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/message/message";
     $.ajax({
-        url: queryURL,
+        url: queryURL + '/update',
         type: "PUT",
         data: dataToSend,
         contentType: 'application/json',
@@ -116,9 +147,9 @@ function deleteMessage(idMessage){
     };
 
     let dataToSend=JSON.stringify(myData);
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/message/message";
+    
     $.ajax({
-        url: queryURL,
+        url: queryURL +'/'+idMessage,
         type:"DELETE",
 		data:dataToSend,
 		contentType:"application/JSON",

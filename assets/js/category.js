@@ -1,3 +1,10 @@
+// URL variable constante
+const queryURL = 'http://129.151.115.16:8080/api/Category';
+
+$(document).ready(function () {
+    categoryTable()
+});
+
 // Funcion para crear las filas de la tabla alimentada por la funcion CategoryTable 
 var createRow = function(items) {
     // creamos unanueva fila en la tabla
@@ -7,14 +14,16 @@ var createRow = function(items) {
 
         var idTd = $("<td>").text(items[i].id);
         var nameTd = $("<td>").text(items[i].name);
-        var buttonDelete = "<button onclick='deleteCategory("+items[i].id+")'>Borrar</button>";
-        
-        
-        
+        var descriptionTd = $("<td>").text(items[i].description);
+        var buttonDelete = '<button onclick="deleteMachine('+items[i].id+')" class="btn btn-danger" >Borrar</button>';
+        var buttonUpdate = '&nbsp;&nbsp;'+'<button onclick="loadDataForm(' + items[i].id + ')" class="btn btn-success" > Editar </button>';
+
 
         tRow.append(idTd);
         tRow.append(nameTd);
+        tRow.append(descriptionTd);
         tRow.append(buttonDelete);
+        tRow.append(buttonUpdate);
         
         $("tbody").append(tRow)
 
@@ -24,20 +33,22 @@ var createRow = function(items) {
 }
 // Funcion que consulta toda la info de la tabla machine SQL Cloud
 var categoryTable = function(){
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/category/category";
+    
     $.ajax({
-        url: queryURL,
+        url: queryURL + '/all',
         method: "GET",
         datatype:"JSON",
         success:function(response){
-            createRow(response.items);
-            console.log(response.items);
+            var items = response;
+            createRow(items);
+            cleanInfo()
+            console.log(items);
             
         }
     });
 };
 
-categoryTable()
+
 
 
 // Funcion para guardar informacion
@@ -48,14 +59,14 @@ $('#submitButton').on('click', function(){
 
         id:$("#id_category").val(),
         name: $("#name_category").val(),
+        description: $("#description_category").val(),
 
     };
 
     let dataToSend =JSON.stringify(categoryToAdd);
     
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/category/category";
     $.ajax({
-        url: queryURL,
+        url: queryURL + '/save',
         type: "POST",
         data: dataToSend,
         contentType: 'application/json',
@@ -86,9 +97,8 @@ $('#updateButton').on('click', function(){
 
     let dataToSend =JSON.stringify(categoryToAdd);
     
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/category/category";
     $.ajax({
-        url: queryURL,
+        url: queryURL + '/update',
         type: "PUT",
         data: dataToSend,
         contentType: 'application/json',
@@ -116,9 +126,9 @@ function deleteCategory(idCategory){
     };
 
     let dataToSend=JSON.stringify(myData);
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/category/category";
+
     $.ajax({
-        url: queryURL,
+        url: queryURL+'/'+idCategory,
         type:"DELETE",
 		data:dataToSend,
 		contentType:"application/JSON",
@@ -135,4 +145,32 @@ function deleteCategory(idCategory){
         }
     });
 
+}
+
+//Funcion para cargar la info y editarla
+function loadDataForm(idMachine) {
+    $.ajax({
+        url: queryURL + '/' + idMachine,
+        type: 'GET',
+        datatype: 'JSON',
+        success: function (response) {
+            console.log(response);
+            var items = response;
+            var valor = '<input type="submit" id="btnUpdate" onclick="updateMachine(' + myItem.id + ')" value="Actualizar" class="btn btn-warning" />';
+            $("#id").val(items.id);
+            $('#brand').val(items.brand);
+            $('#year').val(items.year);
+            $('#name').val(items.name);
+            $('#description').val(items.description);
+
+            $('#btnCreate').remove();
+            $('#btnForm').html(valor);
+            $("#id").prop('disabled', true);
+        }
+    });
+}
+
+// Limpiar datos del input
+function cleanInfo(){
+    $('#formMachine')[0].reset();
 }

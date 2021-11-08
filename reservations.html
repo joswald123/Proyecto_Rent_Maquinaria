@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Maquinas</title>
+	<title>Reservations</title>
     <link href="https://fonts.googleapis.com/css?family=Helvetica Neue:300,400,700,900" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" 
@@ -79,7 +79,6 @@
         </div>
     </div>
 </header>
-
 <body>
     <div class="container mt-5">
         <div class="row">
@@ -89,11 +88,12 @@
                         <tr>
                         <!-- The scope attribute specifies that this is a header for a column -->
                             <th scope="col">ID</th>
-                            <th scope="col">NAME</th>
-                            <th scope="col">BRAND</th>
-                            <th scope="col">MODEL</th>
-                            <th scope="col">DESCRIPTION</th>
-                            <th scope="col">CATEGORY_NAME</th>
+                            <th scope="col">Client</th>
+                            <th scope="col">Machine</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">Devolution Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -111,34 +111,27 @@
         </div>
     </div>
     <div class="container-formulario">
-        <div class="title">TABLA DE MAQUINAS</div>
+        <div class="title">Reservations</div>
             <form id="formMachine">
                 <div class="form-group">
                     <label for="idMaquina">ID</label>
-                    <input type="number" class="form-control" id="id" placeholder="Id Maquina">
+                    <input type="number" class="form-control" id="id" placeholder="Id Reservation">
                 </div>
                 <div class="form-group">
-                    <label for="nameMaquina">NAME</label>
-                    <input type="text" class="form-control" id="name" placeholder="Name">
+                    <label for="nameMaquina">CLIENT</label>
+                    <input type="number" class="form-control" id="clientName" placeholder="Name">
                 </div>
                 <div class="form-group">
-                    <label for="brandMaquina">BRAND</label>
-                    <input type="text" class="form-control" id="brand" placeholder="Brand">
-                </div>
-                <div class="form-group">
-                    <label for="idMaquina">MODEL</label>
-                    <input type="number" class="form-control" id="year" placeholder="Model">
-                </div>
-                <div class="form-group">
-                    <label for="brandMaquina">DESCRIPTION</label>
-                    <input type="text" class="form-control" id="description" placeholder="Description">
-                </div>
-                <div class="form-group">
-                    <label for="idMaquina">CATEGORY_NAME</label>
-                    <select name="" id="category_id">
-                        <!-- Opciones de la tabla de categoria -->
+                    <label for="brandMaquina">MACHINE</label>
+                    <select class="form-control" name="machine_id" placeholder="Select One" id="machine_id">
+                        <!-- Opciones machine -->
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="idMaquina">Devolution Date</label>
+                    <input type="date" class="form-control" id="devolutionDate" placeholder="Model">
+                </div>
+
         
                 <button type="button" class="btn btn-success offset-md-5" data-toggle="button" aria-pressed="false"
                     autocomplete="off" id="submitButton">Guardar</button>
@@ -156,7 +149,6 @@ integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2TH
 crossorigin="anonymous"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/machine.js"></script>
-    
+<script type="text/javascript" src="assets/js/message.js"></script>    
     
 </html>

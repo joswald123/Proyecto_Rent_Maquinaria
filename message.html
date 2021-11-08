@@ -37,8 +37,15 @@
                     <div class="collapse navbar-collapse" id="toggleMobileMenu">
                         <ul class="navbar-nav ms-auto text-center">
                             <li class="nav-item active">
-                                <a class="nav-link" href="./home.html">Home <span class="sr-only">(Maquinas Disponibles)</span></a>
+                                <a class="nav-link" href="./index.html"><span class="sr-only">(Login)</span></a>
                             </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="./home.html">Maquinas</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="./category.html">Categoria</a>
+                            </li> 
             
                             <li class="nav-item">
                                 <a class="nav-link" href="./client.html">Cliente</a>
@@ -47,10 +54,23 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="./message.html">Mensajes</a>
                             </li>
+
                             <li class="nav-item">
-                                <a class="nav-link" href="./category.html">Categoria</a>
-                            </li>     
-                    
+                                <a class="nav-link" href="./reservations.html">Reservaciones</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Reportes
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="./topClient.html">Top Clients</a></li>
+                                    <li><a class="dropdown-item" href="./status.html">Status</a></li>
+                                    <li><a class="dropdown-item" href="./dates.html  ">Dates</a></li>
+                                </ul>
+                            </li>
+                                
                         </ul>
                     </div>
                 </nav>
@@ -67,9 +87,11 @@
                     <thead>
                         <tr>
                         <!-- The scope attribute specifies that this is a header for a column -->
-                            <th scope="col">ID</th>
-                            <th scope="col">MENSAJE</th>
-                            <th scope="col"></th>
+                            <th scope="col" style="padding-right: 20px">ID</th>
+                            <th scope="col" style="padding-right: 20px">CLIENT</th>
+                            <th scope="col" style="padding-right: 20px">MACHINE</th>
+                            <th scope="col" style="padding-right: 20px">MESSAGE</th>
+                            <th scope="col" style="padding-right: 20px"></th>
                         </tr>
                     </thead>
                     <tbody id="resultado">
@@ -87,7 +109,17 @@
                 <form class="container formulario">
                     <div class="form-group">
                         <label for="idMaquina">ID</label>
-                        <input type="number" class="form-control" id="id" placeholder="Id Client">
+                        <input type="number" class="form-control" id="id" placeholder="Id Mensaje   ">
+                    </div>
+                    <div class="form-group">
+                        <label for="nameMaquina">CLIENT</label>
+                        <input type="number" class="form-control" id="client_id" placeholder="Id Client">
+                    </div>
+                    <div class="form-group">
+                        <label for="">MACHINE</label>
+                        <select class="form-control" name="machine_id" id="machine_id">
+                            
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="nameMaquina">MENSAJE</label>
@@ -107,6 +139,10 @@
     </div>
 
 </body>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+crossorigin="anonymous"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/message.js"></script>    

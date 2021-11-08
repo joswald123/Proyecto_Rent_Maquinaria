@@ -2,16 +2,17 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Massage</title>
+	<title>Category</title>
     <link href="https://fonts.googleapis.com/css?family=Helvetica Neue:300,400,700,900" rel="stylesheet">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" 
-    rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" 
-    crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <link href="assets/css/style.css" rel="stylesheet">
 	
 	
+
+
 </head>
 <header>
     <div id="sticky-header">
@@ -37,8 +38,15 @@
                     <div class="collapse navbar-collapse" id="toggleMobileMenu">
                         <ul class="navbar-nav ms-auto text-center">
                             <li class="nav-item active">
-                                <a class="nav-link" href="./home.html">Home <span class="sr-only">(Maquinas Disponibles)</span></a>
+                                <a class="nav-link" href="./index.html"><span class="sr-only">(Login)</span></a>
                             </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="./home.html">Maquinas</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="./category.html">Categoria</a>
+                            </li> 
             
                             <li class="nav-item">
                                 <a class="nav-link" href="./client.html">Cliente</a>
@@ -47,10 +55,23 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="./message.html">Mensajes</a>
                             </li>
+
                             <li class="nav-item">
-                                <a class="nav-link" href="./category.html">Categoria</a>
-                            </li>     
-                    
+                                <a class="nav-link" href="./reservations.html">Reservaciones</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Reportes
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="./topClient.html">Top Clients</a></li>
+                                    <li><a class="dropdown-item" href="./status.html">Status</a></li>
+                                    <li><a class="dropdown-item" href="./dates.html  ">Dates</a></li>
+                                </ul>
+                            </li>
+                                
                         </ul>
                     </div>
                 </nav>
@@ -62,14 +83,16 @@
 <body>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-sm">
+            <div class="col-6">
                 <table class="content-table">
                     <thead>
                         <tr>
                         <!-- The scope attribute specifies that this is a header for a column -->
-                            <th scope="col">ID</th>
-                            <th scope="col">CATEGORY_NAME</th>
-                            <th scope="col"></th>
+                            <th scope="col" style="padding-right: 20px">ID</th>
+                            <th scope="col" style="padding-right: 20px">CATEGORY</th>
+                            <th scope="col" style="padding-right: 20px">DESCRIPTION</th>
+                            <th scope="col" style="padding-right: 20px"></th>
+                            
                         </tr>
                     </thead>
                     <tbody id="resultado">
@@ -82,7 +105,7 @@
                 </table>
             
             </div>
-            <div class="col-sm container-formulario">
+            <div class="col container-formulario">
                 <div class="title">TABLA CATEGORIA</div>
                 <form class="container formulario">
                     <div class="form-group">
@@ -92,6 +115,10 @@
                     <div class="form-group">
                         <label for="categoryName">NAME</label>
                         <input type="text" class="form-control" id="name_category" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryName">DESCRIPTION</label>
+                        <input type="text" class="form-control" id="description_category" placeholder="Name">
                     </div>
             
                     <button type="button" class="btn btn-success offset-md-5" data-toggle="button" aria-pressed="false"
@@ -107,7 +134,10 @@
     </div>
     
 </body>
-
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/category.js"></script>
     

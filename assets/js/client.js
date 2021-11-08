@@ -1,3 +1,6 @@
+// URL variable constante
+const queryURL = 'http://129.151.115.16:8080/api/Client';
+
 // Funcion para crear las filas de la tabla alimentada por la funcion machineTable 
 var createRow = function(items) {
     // creamos unanueva fila en la tabla
@@ -5,11 +8,11 @@ var createRow = function(items) {
         
         var tRow = $("<tr>");
 
-        var idTd = $("<td>").text(items[i].id);
+        var idTd = $("<td>").text(items[i].idClient);
         var nameTd = $("<td>").text(items[i].name);
         var emailTd = $("<td>").text(items[i].email);
         var ageTd = $("<td>").text(items[i].age);
-        var buttonDelete = "<button onclick='deleteMachine("+items[i].id+")'>Borrar</button>";
+        var buttonDelete = "<button onclick='deleteClient("+items[i].idClient+")'>Borrar</button>";
         
         
         
@@ -28,14 +31,15 @@ var createRow = function(items) {
 }
 // Funcion que consulta toda la info de la tabla machine SQL Cloud
 var clientTable = function(){
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client";
+    
     $.ajax({
-        url: queryURL,
+        url: queryURL + '/all',
         method: "GET",
         datatype:"JSON",
         success:function(response){
-            createRow(response.items);
-            console.log(response.items);
+            var items = response;
+            createRow(items);
+            console.log(items);
             
         }
     });
@@ -59,9 +63,8 @@ $('#submitButton').on('click', function(){
 
     let dataToSend =JSON.stringify(clientToAdd);
     
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client";
     $.ajax({
-        url: queryURL,
+        url: queryURL + '/save',
         type: "POST",
         data: dataToSend,
         contentType: 'application/json',
@@ -94,9 +97,8 @@ $('#updateButton').on('click', function(){
 
     let dataToSend =JSON.stringify(machineToAdd);
     
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client";
     $.ajax({
-        url: queryURL,
+        url: queryURL + '/update',
         type: "PUT",
         data: dataToSend,
         contentType: 'application/json',
@@ -119,16 +121,16 @@ $('#updateButton').on('click', function(){
 
 
 // funcion para eliminar info
-function deleteMachine(idClient){
+function deleteClient(idClient){
     
     let myData={
         id:idClient
     };
 
     let dataToSend=JSON.stringify(myData);
-    var queryURL = "https://g9004d44ee12137-db202109240616.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client";
+    
     $.ajax({
-        url: queryURL,
+        url: queryURL + '/' + idClient,
         type:"DELETE",
 		data:dataToSend,
 		contentType:"application/JSON",
